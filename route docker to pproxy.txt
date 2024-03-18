@@ -1,0 +1,65 @@
+sudo apt-get update
+sudo apt-get install --yes curl
+
+curl -fsSL get.docker.com -o ${HOME}/get-docker.sh
+sudo sh ${HOME}/get-docker.sh
+
+sudo usermod -aG docker $(whoami)
+
+
+sudo systemctl enable docker.service
+
+sudo systemctl enable containerd.service
+
+service docker start
+
+
+docker network create -d bridge app1
+
+docker network create -d bridge --subnet=176.124.192.0/24 -o "com.docker.network.bridge.name=cloud1" cloud1
+
+
+pip3 install pproxy
+
+pip3 install pproxy --break-system-packages
+
+screen -S app1 -d -m pproxy -l redir://:5001 -r socks5://62.210.99.138:5001 -vv
+
+iptables -t nat -A PREROUTING -p tcp -m tcp -i docker0 --dport 1:65535 -j REDIRECT --to-ports 5001
+
+
+docker run --privileged -d --restart unless-stopped --name=app --net app docker:dind
+
+docker exec -it app /bin/sh
+
+
+
+export DEVICE=app1
+
+echo $DEVICE
+
+apk add sudo
+
+
+docker pull iproyal/pawns-cli:latest
+docker run -d --restart=on-failure:5 --name iproyal iproyal/pawns-cli:latest -email=jovancamega55@gmail.com -password=alijayadi97 -device-name=$DEVICE -device-id=$DEVICE -accept-tos
+
+
+sudo docker stop watchtower; sudo docker rm watchtower; sudo docker rmi containrrr/watchtower; sudo docker stop psclient; sudo docker rm psclient; sudo docker rmi packetstream/psclient; sudo docker run -d --restart=always -e CID=27vS --name psclient packetstream/psclient:latest && sudo docker run -d --restart=always --name watchtower -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --cleanup --include-stopped --include-restarting --revive-stopped --interval 60 psclient
+
+
+export DEVICE=app1
+
+echo $test1
+
+docker run -d --restart unless-stopped --name tm traffmonetizer/cli start accept --token szTOxENBjIpCV1nDskvXEyMZ5ojHOwFsdhFeZxRrqko= --device-name $test1
+
+
+
+docker logs tm
+
+docker logs psclient
+
+docker logs iproyal
+
+
